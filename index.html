@@ -18,14 +18,7 @@
 .intro{margin:.5em 0}.jsDelivr,.ex,.main{margin:1em 0}.jsDelivr>img{margin:0 0 10px}.git .head{display:flex;align-items:center;margin:0 0 .5em}.git .head span{font-size:1.3em;font-weight:500;display:inline-block;margin:0 0 0 6px}.ex ul li{word-break:break-all}.gitlink.invalid{border-color:#ffaf86;box-shadow:0 0 0 .2rem rgba(234,121,55,0.25)}.footer{padding:1em 0;border-top:1px solid #eaeaea}.embed-label{display:inline-block;margin:10px 0}
     </style>
 </head>
-<body><div class="container"><div class="row"><div class="col-lg-12 col-xl-12 col-sm-12 col-md-12"><div class="head"><h1 class="text-center intro">Hung Visual Basic Github to jsDelivr</h1><p class="text-center">
-                        <a href='https://www.hungvb.com' target='_blank'><img src='https://cdn.jsdelivr.net/gh/timcancoem92/HungQB.Online/logo-removebg-preview.png'/></a>
-                    </p>
-                </div>
-                <div class="main">
-                    <div class="git">
-                        <div class="head">
-                            <img src="//i.imgur.com/jbCwXbB.png" width="25" height="25"> <span>Github</span>
+<body><div class="container"><div class="row"><div class="col-lg-12 col-xl-12 col-sm-12 col-md-12"><div class="head"><h1 class="text-center intro">Hung Visual Basic Github to jsDelivr</h1><p class="text-center"><a href='https://www.hungvb.com' target='_blank'><img src='https://cdn.jsdelivr.net/gh/timcancoem92/HungQB.Online/logo-removebg-preview.png'/></a></p></div><div class="main"> <div class="git"><div class="head"> <img src="//i.imgur.com/jbCwXbB.png" width="25" height="25"> <span>Github</span>
                         </div>
                         <div class="form-group row">
                             <div class="col-lg-12 col-xl-12 col-sm-12 col-md-12">
@@ -122,98 +115,5 @@
         </div>
     </div>
     <script type="text/javascript">
-    const giturl = /^https?:\/\/github\.com\/(.+?)\/(.+?)\/(?!releases\/)(?:(?:blob|raw|blame)\/)?(.+?)\/(.+)/i,
-        rawgit = /^https?:\/\/raw\.github(?:usercontent)?\.com\/(.+?)\/(.+?)\/(.+?)\/(.+)/i;
-    (function(doc) {
-        doc.getElementsByClassName("gitlink")[0].focus();
-        doc.getElementsByClassName("year")[0].innerHTML = new Date().getFullYear();
-
-        var a = () => {
-            let t = doc.getElementsByClassName("gitlink")[0].value;
-            let y = t.match(giturl),
-                l = t.match(rawgit);
-
-            var n = (e, i) => {
-                doc.getElementsByClassName("gitlink")[0].classList.remove("invalid");
-                let n = `https://api.github.com/repos/${i[1]}/${i[2]}/commits/${i[3]}`;
-                fetch(n)
-                    .then(r => r.json())
-                    .then(i => {
-                        let n = i.sha,
-                            c = t.replace(e, `https://cdn.jsdelivr.net/gh/$1/$2@${n}/$4`),
-                            d = t.replace(e, `https://cdn.jsdelivr.net/gh/$1/$2/$4`),
-                            k = t.replace(e, `https://cdn.jsdelivr.net/gh/$1/$2@${n.substring(0,7)}/$4`),
-                            q = t.split("/").pop();
-                        doc.getElementById("o").value = c;
-                        doc.getElementById("m").value = d;
-                        doc.getElementById("r").value = k;
-                        if (q.indexOf(".js") != -1) {
-                            doc.getElementById("n").value = `<script src="${c}" type="text/javascript"><\/script>`;
-                            doc.getElementById("p").value = `<script src="${d}" type="text/javascript"><\/script>`;
-                            doc.getElementById("t").value = `<script src="${k}" type="text/javascript"><\/script>`;
-                        };
-                        if (q.indexOf(".css") != -1) {
-                            doc.getElementById("n").value = `<link href="${c}" rel="stylesheet" type="text/css"/>`;
-                            doc.getElementById("p").value = `<link href="${d}" rel="stylesheet" type="text/css"/>`;
-                            doc.getElementById("t").value = `<link href="${k}" rel="stylesheet" type="text/css"/>`;
-                        };
-                        if (q.indexOf(".png") != -1 || q.indexOf(".jpg") != -1 || q.indexOf(".gif") != -1 || q.indexOf(".svg") != -1 || q.indexOf(".jpeg") != -1) {
-                            doc.getElementById("n").value = `<img src="${c}">`;
-                            doc.getElementById("p").value = `<img src="${d}">`;
-                            doc.getElementById("t").value = `<img src="${k}">`;
-                        };
-                    })
-                    .catch(e => console.error(e))
-            }
-            giturl.test(t) ? n(giturl, y) : rawgit.test(t) ? n(rawgit, l) : doc.getElementsByClassName("gitlink")[0].classList.add("invalid")
-        }
-
-        var b = id => {
-            doc.getElementById(id).value.length > 0 ? (doc.getElementById(id).select(), doc.execCommand("copy")) : alert("Nothing to copy !")
-        }
-
-        var c = id => {
-            doc.getElementById(id).value.length > 0 ? window.open(doc.getElementById(id).value) : (alert("Nothing to test !"))
-        }
-        doc.getElementById("x").addEventListener("click", () => {
-            doc.getElementById("g").focus();
-            let a = doc.querySelectorAll("#g,#o,#m,#n,#p,#t,#r");
-            for (let i = 0; i < a.length; i++) {
-                a[i].value = "";
-            };
-        })
-        doc.getElementById("c1").addEventListener("click", () => {
-            b("o");
-        })
-        doc.getElementById("c2").addEventListener("click", () => {
-            b("r");
-        })
-        doc.getElementById("c3").addEventListener("click", () => {
-            b("m");
-        })
-        doc.getElementById("c4").addEventListener("click", () => {
-            b("n");
-        })
-        doc.getElementById("c5").addEventListener("click", () => {
-            b("t");
-        })
-        doc.getElementById("c6").addEventListener("click", () => {
-            b("p");
-        })
-        doc.getElementById("t1").addEventListener("click", () => {
-            c("o");
-        })
-        doc.getElementById("t2").addEventListener("click", () => {
-            c("r");
-        })
-        doc.getElementById("t3").addEventListener("click", () => {
-            c("m");
-        })
-        doc.getElementById("g").addEventListener("input", a)
-    })(document);
-    </script>
-    
-     <a href='https://hungqb.online/github.html' style='display:scroll;position:fixed;Top:0px;left:5px;' target='_blank'><img src='https://cdn.jsdelivr.net/gh/timcancoem92/HungQB.Online/hoadao.png'/></a>
-
-</body>
-</html>
+const giturl=/^https?:\/\/github\.com\/(.+?)\/(.+?)\/(?!releases\/)(?:(?:blob|raw|blame)\/)?(.+?)\/(.+)/i,rawgit=/^https?:\/\/raw\.github(?:usercontent)?\.com\/(.+?)\/(.+?)\/(.+?)\/(.+)/i;!function(e){e.getElementsByClassName("gitlink")[0].focus(),e.getElementsByClassName("year")[0].innerHTML=(new Date).getFullYear();var t=t=>{e.getElementById(t).value.length>0?(e.getElementById(t).select(),e.execCommand("copy")):alert("Nothing to copy !")},l=t=>{e.getElementById(t).value.length>0?window.open(e.getElementById(t).value):alert("Nothing to test !")};e.getElementById("x").addEventListener("click",()=>{e.getElementById("g").focus();let t=e.querySelectorAll("#g,#o,#m,#n,#p,#t,#r");for(let e=0;e<t.length;e++)t[e].value=""}),e.getElementById("c1").addEventListener("click",()=>{t("o")}),e.getElementById("c2").addEventListener("click",()=>{t("r")}),e.getElementById("c3").addEventListener("click",()=>{t("m")}),e.getElementById("c4").addEventListener("click",()=>{t("n")}),e.getElementById("c5").addEventListener("click",()=>{t("t")}),e.getElementById("c6").addEventListener("click",()=>{t("p")}),e.getElementById("t1").addEventListener("click",()=>{l("o")}),e.getElementById("t2").addEventListener("click",()=>{l("r")}),e.getElementById("t3").addEventListener("click",()=>{l("m")}),e.getElementById("g").addEventListener("input",()=>{let t=e.getElementsByClassName("gitlink")[0].value,l=t.match(giturl),n=t.match(rawgit);var s=(l,n)=>{e.getElementsByClassName("gitlink")[0].classList.remove("invalid");let s=`https://api.github.com/repos/${n[1]}/${n[2]}/commits/${n[3]}`;fetch(s).then(e=>e.json()).then(n=>{let s=n.sha,i=t.replace(l,`https://cdn.jsdelivr.net/gh/$1/$2@${s}/$4`),c=t.replace(l,"https://cdn.jsdelivr.net/gh/$1/$2/$4"),a=t.replace(l,`https://cdn.jsdelivr.net/gh/$1/$2@${s.substring(0,7)}/$4`),d=t.split("/").pop();e.getElementById("o").value=i,e.getElementById("m").value=c,e.getElementById("r").value=a,-1!=d.indexOf(".js")&&(e.getElementById("n").value=`<script src="${i}" type="text/javascript"><\/script>`,e.getElementById("p").value=`<script src="${c}" type="text/javascript"><\/script>`,e.getElementById("t").value=`<script src="${a}" type="text/javascript"><\/script>`),-1!=d.indexOf(".css")&&(e.getElementById("n").value=`<link href="${i}" rel="stylesheet" type="text/css"/>`,e.getElementById("p").value=`<link href="${c}" rel="stylesheet" type="text/css"/>`,e.getElementById("t").value=`<link href="${a}" rel="stylesheet" type="text/css"/>`),-1==d.indexOf(".png")&&-1==d.indexOf(".jpg")&&-1==d.indexOf(".gif")&&-1==d.indexOf(".svg")&&-1==d.indexOf(".jpeg")||(e.getElementById("n").value=`<img src="${i}">`,e.getElementById("p").value=`<img src="${c}">`,e.getElementById("t").value=`<img src="${a}">`)}).catch(e=>console.error(e))};giturl.test(t)?s(giturl,l):rawgit.test(t)?s(rawgit,n):e.getElementsByClassName("gitlink")[0].classList.add("invalid")})}(document);
+    </script> <a href='https://hungqb.online/github.html' style='display:scroll;position:fixed;Top:0px;left:5px;' target='_blank'><img src='https://cdn.jsdelivr.net/gh/timcancoem92/HungQB.Online/hoadao.png'/></a></body></html>
