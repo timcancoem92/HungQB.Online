@@ -76,44 +76,6 @@
                                 </div>
                                 <br>
                                 <div class="row">
-                                    <div class="col-lg-10 col-xl-10 col-sm-10 col-md-10">
-                                        <input type="text" class="form-control" id="t" placeholder="Embedded code with lastest commit (short hash)" readonly="">
-                                    </div>
-                                    <div class="col-lg-2 col-xl-2 col-sm-2 col-md-2">
-                                        <button class="btn btn-success" id="c5">COPY</button>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-lg-10 col-xl-10 col-sm-10 col-md-10">
-                                        <input type="text" class="form-control" id="p" placeholder="Embedded code without lastest commit" readonly="">
-                                    </div>
-                                    <div class="col-lg-2 col-xl-2 col-sm-2 col-md-2">
-                                        <button class="btn btn-success" id="c6">COPY</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="btngroup">
-                    <button class="btn btn-danger" id="x">RESET</button>
-                </div>
-                <div class="ex">
-                    <h5>Valid URL</h5>
-                    <ul>
-                        <li>Github file URL: <b>https://github.com/twbs/bootstrap/blob/v4-dev/dist/css/bootstrap.min.css</b></li>
-                        <li>Github file URL: <b>https://github.com/twbs/bootstrap/raw/v4-dev/dist/css/bootstrap.min.css</b></li>
-                        <li>Github file URL: <b>https://github.com/twbs/bootstrap/blame/v4-dev/dist/css/bootstrap.min.css</b></li>
-                        <li>Github raw file URL: <b>https://raw.githubusercontent.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.min.css</b></li>
-                    </ul>
-                </div>
-                <div class="footer text-center">
-                    @ <span class="year"></span> by Hung Visual Basic Edit
-                </div>
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript">
+                                    <div class="col-lg-10 col-xl-10 col-sm-10 col-md-10"><input type="text" class="form-control" id="t" placeholder="Embedded code with lastest commit (short hash)" readonly=""></div><div class="col-lg-2 col-xl-2 col-sm-2 col-md-2"><button class="btn btn-success" id="c5">COPY</button></div></div><br><div class="row"><div class="col-lg-10 col-xl-10 col-sm-10 col-md-10"><input type="text" class="form-control" id="p" placeholder="Embedded code without lastest commit" readonly=""></div><div class="col-lg-2 col-xl-2 col-sm-2 col-md-2"><button class="btn btn-success" id="c6">COPY</button></div></div></div> </div></div></div><div class="btngroup"><button class="btn btn-danger" id="x">RESET</button></div><div class="ex"><h5>Valid URL</h5><ul><li>Github file URL: <b>https://github.com/twbs/bootstrap/blob/v4-dev/dist/css/bootstrap.min.css</b></li><li>Github file URL: <b>https://github.com/twbs/bootstrap/raw/v4-dev/dist/css/bootstrap.min.css</b></li><li>Github file URL: <b>https://github.com/twbs/bootstrap/blame/v4-dev/dist/css/bootstrap.min.css</b></li><li>Github raw file URL: <b>https://raw.githubusercontent.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.min.css</b></li></ul></div><div class="footer text-center"> @ <span class="year"></span> by Hung Visual Basic Edit</div></div></div></div><script type="text/javascript">
 const giturl=/^https?:\/\/github\.com\/(.+?)\/(.+?)\/(?!releases\/)(?:(?:blob|raw|blame)\/)?(.+?)\/(.+)/i,rawgit=/^https?:\/\/raw\.github(?:usercontent)?\.com\/(.+?)\/(.+?)\/(.+?)\/(.+)/i;!function(e){e.getElementsByClassName("gitlink")[0].focus(),e.getElementsByClassName("year")[0].innerHTML=(new Date).getFullYear();var t=t=>{e.getElementById(t).value.length>0?(e.getElementById(t).select(),e.execCommand("copy")):alert("Nothing to copy !")},l=t=>{e.getElementById(t).value.length>0?window.open(e.getElementById(t).value):alert("Nothing to test !")};e.getElementById("x").addEventListener("click",()=>{e.getElementById("g").focus();let t=e.querySelectorAll("#g,#o,#m,#n,#p,#t,#r");for(let e=0;e<t.length;e++)t[e].value=""}),e.getElementById("c1").addEventListener("click",()=>{t("o")}),e.getElementById("c2").addEventListener("click",()=>{t("r")}),e.getElementById("c3").addEventListener("click",()=>{t("m")}),e.getElementById("c4").addEventListener("click",()=>{t("n")}),e.getElementById("c5").addEventListener("click",()=>{t("t")}),e.getElementById("c6").addEventListener("click",()=>{t("p")}),e.getElementById("t1").addEventListener("click",()=>{l("o")}),e.getElementById("t2").addEventListener("click",()=>{l("r")}),e.getElementById("t3").addEventListener("click",()=>{l("m")}),e.getElementById("g").addEventListener("input",()=>{let t=e.getElementsByClassName("gitlink")[0].value,l=t.match(giturl),n=t.match(rawgit);var s=(l,n)=>{e.getElementsByClassName("gitlink")[0].classList.remove("invalid");let s=`https://api.github.com/repos/${n[1]}/${n[2]}/commits/${n[3]}`;fetch(s).then(e=>e.json()).then(n=>{let s=n.sha,i=t.replace(l,`https://cdn.jsdelivr.net/gh/$1/$2@${s}/$4`),c=t.replace(l,"https://cdn.jsdelivr.net/gh/$1/$2/$4"),a=t.replace(l,`https://cdn.jsdelivr.net/gh/$1/$2@${s.substring(0,7)}/$4`),d=t.split("/").pop();e.getElementById("o").value=i,e.getElementById("m").value=c,e.getElementById("r").value=a,-1!=d.indexOf(".js")&&(e.getElementById("n").value=`<script src="${i}" type="text/javascript"><\/script>`,e.getElementById("p").value=`<script src="${c}" type="text/javascript"><\/script>`,e.getElementById("t").value=`<script src="${a}" type="text/javascript"><\/script>`),-1!=d.indexOf(".css")&&(e.getElementById("n").value=`<link href="${i}" rel="stylesheet" type="text/css"/>`,e.getElementById("p").value=`<link href="${c}" rel="stylesheet" type="text/css"/>`,e.getElementById("t").value=`<link href="${a}" rel="stylesheet" type="text/css"/>`),-1==d.indexOf(".png")&&-1==d.indexOf(".jpg")&&-1==d.indexOf(".gif")&&-1==d.indexOf(".svg")&&-1==d.indexOf(".jpeg")||(e.getElementById("n").value=`<img src="${i}">`,e.getElementById("p").value=`<img src="${c}">`,e.getElementById("t").value=`<img src="${a}">`)}).catch(e=>console.error(e))};giturl.test(t)?s(giturl,l):rawgit.test(t)?s(rawgit,n):e.getElementsByClassName("gitlink")[0].classList.add("invalid")})}(document);
     </script> <a href='https://hungqb.online/github.html' style='display:scroll;position:fixed;Top:0px;left:5px;' target='_blank'><img src='https://cdn.jsdelivr.net/gh/timcancoem92/HungQB.Online/hoadao.png'/></a></body></html>
